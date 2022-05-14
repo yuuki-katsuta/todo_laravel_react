@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./built/",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "module": "es2015", //フロント使用予定なのでcommonjsは使用しません
+    "jsx": "react", // tsxファイルをjsxやjsにコンパイルする際の出力の形式を指定する
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "target": "es6",
+    "lib": ["es2016", "dom"],
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "resources/ts" // TypeScriptのソース配置場所
+  ]
+}
