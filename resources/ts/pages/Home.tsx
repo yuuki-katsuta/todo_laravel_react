@@ -9,7 +9,7 @@ export const Home = () => {
   const { isLoading } = useGetToDoList();
   //useGetToDoList()で取得したらtoDoListに格納される
   const toDoList = useCurrentToDoList();
-  if (isLoading) return <p>isLoading</p>;
+  if (isLoading) return <h3>Loading...</h3>;
   //console.log(toDoList);
   return (
     <Grid container spacing={2}>
