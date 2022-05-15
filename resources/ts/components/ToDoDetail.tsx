@@ -6,14 +6,15 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import { Delete } from '@mui/icons-material';
+import { ToDoDetail as detailType } from '../typs';
 
 type Props = {
-  id: number;
+  detail: detailType;
 };
-export const ToDoDetail = ({ id }: Props) => {
+export const ToDoDetail = ({ detail }: Props) => {
   return (
     <ListItem
-      key={id}
+      key={detail.id}
       secondaryAction={
         <IconButton edge='end' aria-label='comments'>
           <Delete />
@@ -25,7 +26,7 @@ export const ToDoDetail = ({ id }: Props) => {
         <ListItemIcon>
           <Checkbox edge='start' />
         </ListItemIcon>
-        <ListItemText primary={'ToDoDetail' + id.toString()} />
+        <ListItemText primary={detail.name} />
       </ListItemButton>
     </ListItem>
   );
