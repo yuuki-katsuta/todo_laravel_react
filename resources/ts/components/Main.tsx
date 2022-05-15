@@ -1,18 +1,20 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import { Box } from '@mui/system';
-import Navigation from './Navigation';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Example from '../pages/Example';
+import { Box } from '@mui/system';
+import { Navigation } from './Navigation';
+import { Home } from '../pages/Home';
 
 function Main() {
   return (
     <Box>
       <Navigation />
       <Router>
-        <Routes>
-          <Route path='/' element={<Example />} />
-        </Routes>
+        <main className={'m-5'}>
+          <Routes>
+            <Route path='/' element={<Home />} />
+          </Routes>
+        </main>
       </Router>
     </Box>
   );
