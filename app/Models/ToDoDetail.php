@@ -13,4 +13,10 @@ class ToDoDetail extends Model
     {
         return $this->belongsTo(ToDo::class);
     }
+
+    //completed_flagが呼ばれるとき実行。$valueはdbのcompleted_flagの値
+    public function getCompletedFlagAttribute($value)
+    {
+        return $value === 1;
+    }
 }

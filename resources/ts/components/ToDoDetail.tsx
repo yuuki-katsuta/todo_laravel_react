@@ -10,14 +10,15 @@ import { TextField } from '@mui/material';
 import { useUpdateToDoDetailMutateTask } from '../hooks/ToDoDetail';
 
 type Props = {
-  detail: detailType<number>;
+  detail: detailType;
 };
 export const ToDoDetail = ({ detail }: Props) => {
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
   let toDoDetail = {
     id: detail.id,
+    to_do_id: detail.to_do_id,
     name: detail.name,
-    completed_flag: detail.completed_flag === 1,
+    completed_flag: detail.completed_flag,
   };
   const { updateToDoDetailMutation } = useUpdateToDoDetailMutateTask();
   const eventUpdateToDoDetail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +54,7 @@ export const ToDoDetail = ({ detail }: Props) => {
         <ListItemIcon>
           <Checkbox
             edge='start'
-            defaultChecked={detail.completed_flag === 1}
+            checked={detail.completed_flag}
             onChange={eventCheckToDoDetail}
           />
         </ListItemIcon>

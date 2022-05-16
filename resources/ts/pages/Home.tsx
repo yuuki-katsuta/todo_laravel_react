@@ -7,7 +7,7 @@ import { ToDo as ToDoType } from '../typs';
 export const Home = () => {
   //apiを使いtodoリスト取得
   const { isLoading } = useGetToDoList();
-  //useGetToDoList()で取得したらtoDoListに格納される
+  //useGetToDoList()で取得したら”toDoList”というキーでキャッシュに格納され、それを他から使い回せる
   const toDoList = useCurrentToDoList();
   if (isLoading) return <h3>Loading...</h3>;
   //console.log(toDoList);

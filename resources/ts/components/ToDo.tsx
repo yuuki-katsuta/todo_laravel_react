@@ -5,7 +5,7 @@ import { ToDo as ToDoType } from '../typs';
 import { ToDoDetail } from './ToDoDetail';
 
 type Props = {
-  toDo: ToDoType<number>;
+  toDo: ToDoType;
 };
 export const ToDo = ({ toDo }: Props) => {
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
@@ -19,7 +19,7 @@ export const ToDo = ({ toDo }: Props) => {
     timer && clearTimeout(timer);
     //0.5秒待って実行
     const newTimer = setTimeout(() => {
-      let data: ToDoType<number> = {
+      let data: ToDoType = {
         ...toDoData,
         title: e.target.value,
       };

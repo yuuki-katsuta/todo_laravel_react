@@ -5,12 +5,13 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Box } from '@mui/system';
 import { Navigation } from './Navigation';
 import { Home } from '../pages/Home';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 const client = new QueryClient();
 function Main() {
   return (
-    <QueryClientProvider client={client}>
-      <Box>
+    <Box>
+      <QueryClientProvider client={client}>
         <Navigation />
         <Router>
           <main className={'m-5'}>
@@ -19,11 +20,11 @@ function Main() {
             </Routes>
           </main>
         </Router>
-      </Box>
-    </QueryClientProvider>
+        <ReactQueryDevtools></ReactQueryDevtools>
+      </QueryClientProvider>
+    </Box>
   );
 }
 
 export default Main;
-// for <div id="main-employee"></div>
 ReactDOM.render(<Main />, document.getElementById('app'));
