@@ -4,8 +4,10 @@ import { ToDo } from '../../typs';
 
 export const useUpdateToDoMutateTask = () => {
   // toDoは更新対象
-  const updateToDoMutation = useMutation((toDo: ToDo) =>
-    axios.put('http://localhost/api/toDos/' + toDo.id, { title: toDo.title })
+  const updateToDoMutation = useMutation((toDo: ToDo<number>) =>
+    axios.put('http://localhost/api/toDos/' + toDo.id.toString(), {
+      title: toDo.title,
+    })
   );
   return { updateToDoMutation };
 };

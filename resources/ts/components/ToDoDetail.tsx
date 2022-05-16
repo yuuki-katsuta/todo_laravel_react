@@ -1,17 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import { Delete } from '@mui/icons-material';
 import { ToDoDetail as detailType } from '../typs';
+import { TextField } from '@mui/material';
+import { useUpdateToDoDetailMutateTask } from '../hooks/ToDoDetail';
 
 type Props = {
-  detail: detailType;
+  detail: detailType<number>;
 };
 export const ToDoDetail = ({ detail }: Props) => {
+  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
+  let toDoDetail = {
+    id: detail.id,
+    name: detail.name,
+    completed_flag: detail.completed_flag === 1,
+  };
+  const { updateToDoDetailMutation } = useUpdateToDoDetailMutateTask();
+  const eventUpdateToDoDetail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    timer && clearTimeout(timer);
+    const newTimer = setTimeout(() => {
+      let data = {
+        ...toDoDetail,
+        name: e.target.value,
+      };
+      updateToDoDetailMutation.mutate(data);
+    }, 500);
+    setTimer(newTimer);
+  };
+  const eventCheckToDoDetail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let data = {
+      ...toDoDetail,
+      completed_flag: e.target.checked,
+    };
+    updateToDoDetailMutation.mutate(data);
+  };
+
   return (
     <ListItem
       key={detail.id}
@@ -24,9 +51,19 @@ export const ToDoDetail = ({ detail }: Props) => {
     >
       <ListItemButton>
         <ListItemIcon>
-          <Checkbox edge='start' />
+          <Checkbox
+            edge='start'
+            defaultChecked={detail.completed_flag === 1}
+            onChange={eventCheckToDoDetail}
+          />
         </ListItemIcon>
-        <ListItemText primary={detail.name} />
+        <TextField
+          variant='standard'
+          margin='dense'
+          defaultValue={detail.name}
+          fullWidth
+          onChange={eventUpdateToDoDetail}
+        />
       </ListItemButton>
     </ListItem>
   );

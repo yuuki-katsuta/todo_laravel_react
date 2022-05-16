@@ -1,11 +1,11 @@
-export type ToDo = {
+export type ToDo<T> = {
   id: number;
   title: string;
-  to_do_details?: ToDoDetail[];
+  to_do_details?: ToDoDetail<T>[];
 };
 
-export type ToDoDetail = {
+export type ToDoDetail<T> = {
   id: number;
   name: string;
-  completed_flag: boolean;
+  completed_flag: T;
 };

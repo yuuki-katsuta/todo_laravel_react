@@ -5,7 +5,7 @@ import { ToDo as ToDoType } from '../typs';
 import { ToDoDetail } from './ToDoDetail';
 
 type Props = {
-  toDo: ToDoType;
+  toDo: ToDoType<number>;
 };
 export const ToDo = ({ toDo }: Props) => {
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
@@ -16,10 +16,10 @@ export const ToDo = ({ toDo }: Props) => {
   const { updateToDoMutation } = useUpdateToDoMutateTask();
   const eventUpdateToDo = (e: React.ChangeEvent<HTMLInputElement>) => {
     //入力する毎にタイマー初期化(0.5秒の間に発火すると初期化される)
-    timer !== null && clearTimeout(timer);
+    timer && clearTimeout(timer);
     //0.5秒待って実行
     const newTimer = setTimeout(() => {
-      let data: ToDoType = {
+      let data: ToDoType<number> = {
         ...toDoData,
         title: e.target.value,
       };
