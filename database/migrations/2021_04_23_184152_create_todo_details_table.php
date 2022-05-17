@@ -13,6 +13,10 @@ class CreateTodoDetailsTable extends Migration
      */
     public function up()
     {
+        if (Schema::hasTable('to_do_details')) {
+            // テーブルが存在していればリターン
+            return;
+        }
         Schema::create('to_do_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('to_do_id')

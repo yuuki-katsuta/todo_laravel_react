@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Delete } from '@mui/icons-material';
+import { AddCircle, Delete } from '@mui/icons-material';
 import {
   Card,
   CardContent,
@@ -14,6 +14,7 @@ import {
 } from '../hooks/ToDo';
 import { ToDo as ToDoType } from '../typs';
 import { ToDoDetail } from './ToDoDetail';
+import { useStoreToDoDetailMutateTask } from '../hooks/ToDoDetail';
 
 type Props = {
   toDo: ToDoType;
@@ -22,6 +23,7 @@ export const ToDo = ({ toDo }: Props) => {
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
   const { updateToDoMutation } = useUpdateToDoMutateTask();
   const { deleteToDoMutation } = useDeleteToDoMutateTask();
+  const { storeToDoDetailMutation } = useStoreToDoDetailMutateTask();
 
   let toDoData = {
     id: toDo.id,
@@ -47,6 +49,10 @@ export const ToDo = ({ toDo }: Props) => {
     deleteToDoMutation.mutate(toDo);
   };
 
+  const eventStoreToDoDetail = () => {
+    storeToDoDetailMutation.mutate(toDo);
+  };
+
   return (
     <Card>
       <TextField
@@ -64,6 +70,14 @@ export const ToDo = ({ toDo }: Props) => {
         </List>
       </CardContent>
       <CardActions>
+        <IconButton
+          edge='start'
+          aria-label='add'
+          color='primary'
+          onClick={eventStoreToDoDetail}
+        >
+          <AddCircle />
+        </IconButton>
         <IconButton edge='end' aria-label='delete' onClick={eventDeleteToDo}>
           <Delete />
         </IconButton>

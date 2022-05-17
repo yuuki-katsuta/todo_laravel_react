@@ -13,6 +13,10 @@ class CreateTodosTable extends Migration
      */
     public function up()
     {
+        if (Schema::hasTable('to_dos')) {
+            // テーブルが存在していればリターン
+            return;
+        }
         Schema::create('to_dos', function (Blueprint $table) {
             $table->id();
             $table->text('title');
