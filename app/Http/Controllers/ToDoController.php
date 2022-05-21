@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ToDo\StoreRequest;
 use App\Http\Requests\ToDo\UpdateRequest;
 use App\Models\ToDo;
-use Illuminate\Http\Request;
+use App\Models\ToDoDetail;
+use Illuminate\Support\Facades\DB;
 
 class ToDoController extends Controller
 {
@@ -47,8 +48,17 @@ class ToDoController extends Controller
         // タイトルをToDoモデルに設定する
         $toDo->title = $request->get('title');
 
+        //空のToDodetail作成
+        $toDoDetail = new ToDoDetail();
+        $toDoDetail->name = null;
+        $toDoDetail->completed_flag = false;
+
         // DBにデータを登録する
-        $toDo->save();
+        DB::transaction(function () use ($toDo, $toDoDetail) {
+            $toDo->save();
+            //ToDoのリレーションを持ったToDoDetailを保存する
+            $toDo->toDoDetails()->save($toDoDetail);
+        });
     }
 
     /**

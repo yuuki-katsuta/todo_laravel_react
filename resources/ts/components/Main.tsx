@@ -20,7 +20,7 @@ function Main() {
             </Routes>
           </main>
         </Router>
-        <ReactQueryDevtools></ReactQueryDevtools>
+        {/* <ReactQueryDevtools></ReactQueryDevtools> */}
       </QueryClientProvider>
     </Box>
   );
